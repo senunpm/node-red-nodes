@@ -8,3 +8,7 @@ setenv.sh
 package-lock.json
 social/xmpp/92-xmpp.old
 *.tgz
+*.opendb
+*.opensdf
+*.cachefile
+*.sdf

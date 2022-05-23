@@ -1,12 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\parsers",
-    "\\social\\email",
-    "\\social\\email\\locales",
-    "\\social\\email\\locales\\de",
-    "\\social\\email\\locales\\en-US",
-    "\\social\\email\\locales\\ja"
+    "\\parsers"
   ],
+  "SelectedNode": "\\parsers",
   "PreviewInSolutionExplorer": false
 }
