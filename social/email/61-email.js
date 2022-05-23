@@ -190,10 +190,11 @@ module.exports = function(RED) {
         this.inserver = n.server || (globalkeys && globalkeys.server) || "imap.gmail.com";
         this.inport = n.port || (globalkeys && globalkeys.port) || "993";
         this.box = n.box || "INBOX";
+        this.movefolder = n.movefolder || "PROCESSED";
         this.useSSL= n.useSSL;
         this.autotls= n.autotls;
         this.protocol = n.protocol || "IMAP";
-        this.disposition = n.disposition || "None"; // "None", "Delete", "Read"
+        this.disposition = n.disposition || "None"; // "None", "Delete", "Read", "Move", "Move+Seen"
         this.criteria = n.criteria || "UNSEEN"; // "ALL", "ANSWERED", "FLAGGED", "SEEN", "UNANSWERED", "UNFLAGGED", "UNSEEN"
 
         var flag = false;
@@ -456,6 +457,11 @@ module.exports = function(RED) {
                                                 };
                                                 if (node.disposition === "Delete") {
                                                     imap.addFlags(results, "\Deleted", cleanup);
+                                                } else if (node.disposition === "Move") {
+                                                    imap.move(results, node.movefolder, cleanup);
+                                                } else if (node.disposition === "MoveSeen") {
+                                                    imap.addFlags(results, "\Seen", cleanup);
+                                                    imap.move(results, node.movefolder, cleanup);
                                                 } else if (node.disposition === "Read") {
                                                     imap.addFlags(results, "\Seen", cleanup);
                                                 } else {
